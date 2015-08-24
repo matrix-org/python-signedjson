@@ -43,7 +43,7 @@ setup(
     name="signedjson",
     version=exec_file(("signedjson", "__init__.py",), "__version__"),
     packages=["signedjson"],
-    description="Signed JSON",
+    description="Sign JSON with Ed25519 signatures",
     install_requires=[
         "canonicaljson>=1.0.0",
         "unpaddedbase64>=1.0.1",
