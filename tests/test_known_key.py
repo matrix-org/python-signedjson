@@ -47,7 +47,7 @@ class KnownKeyTestCase(unittest.TestCase):
                 'signatures': {
                     'name': {
                         KEY_NAME: "K8280/U9SSy9IVtjBuVeLr+HpOB4BQFWbg+UZaADMt"
-                            "TdGYI7Geitb76LTrr5QV/7Xg4ahLwYGYZzuHGZKM5ZAQ"
+                        "TdGYI7Geitb76LTrr5QV/7Xg4ahLwYGYZzuHGZKM5ZAQ"
                     },
                 }
             }
@@ -62,7 +62,7 @@ class KnownKeyTestCase(unittest.TestCase):
                 'signatures': {
                     'name': {
                         KEY_NAME: "KqmLSbO39/Bzb0QIYE82zqLwsA+PDzYIpIRA2sRQ4s"
-                            "L53+sN6/fpNSoqE7BP7vBZhG6kYdD13EIMJpvhJI+6Bw"
+                        "L53+sN6/fpNSoqE7BP7vBZhG6kYdD13EIMJpvhJI+6Bw"
                     },
                 }
             }
