@@ -42,10 +42,10 @@ class KnownKeyTestCase(unittest.TestCase):
 
     def test_sign_minimal(self):
         self.assertEquals(
-            sign_json({}, "name", self.signing_key),
+            sign_json({}, "domain", self.signing_key),
             {
                 'signatures': {
-                    'name': {
+                    'domain': {
                         KEY_NAME: "K8280/U9SSy9IVtjBuVeLr+HpOB4BQFWbg+UZaADMt"
                         "TdGYI7Geitb76LTrr5QV/7Xg4ahLwYGYZzuHGZKM5ZAQ"
                     },
@@ -55,12 +55,12 @@ class KnownKeyTestCase(unittest.TestCase):
 
     def test_sign_with_data(self):
         self.assertEquals(
-            sign_json({'one': 1, 'two': "Two"}, "name", self.signing_key),
+            sign_json({'one': 1, 'two': "Two"}, "domain", self.signing_key),
             {
                 'one': 1,
                 'two': "Two",
                 'signatures': {
-                    'name': {
+                    'domain': {
                         KEY_NAME: "KqmLSbO39/Bzb0QIYE82zqLwsA+PDzYIpIRA2sRQ4s"
                         "L53+sN6/fpNSoqE7BP7vBZhG6kYdD13EIMJpvhJI+6Bw"
                     },
