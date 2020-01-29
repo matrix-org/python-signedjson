@@ -1,5 +1,4 @@
 prune .idea
-include *.py
 include tests/*.py
 include LICENSE
 include tox.ini
