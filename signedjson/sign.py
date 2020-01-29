@@ -121,5 +121,7 @@ def verify_signed_json(json_object, signature_name, verify_key):
         verify_key.verify(message, signature)
     except Exception as e:
         raise SignatureVerifyException(
-            "Unable to verify signature for %s: %s %s" % (signature_name, type(e), e)
+            "Unable to verify signature for %s: %s %s" % (
+                signature_name, type(e), e,
+            )
         )
