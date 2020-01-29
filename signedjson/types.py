@@ -18,6 +18,7 @@ from typing_extensions import Protocol
 
 
 class BaseKey(Protocol):
+    """Common base type for VerifyKey and SigningKey"""
     version = ""  # type: str
     alg = ""  # type: str
 
@@ -27,12 +28,14 @@ class BaseKey(Protocol):
 
 
 class VerifyKey(BaseKey):
+    """The public part of a key pair, for use with verify_signed_json"""
     def verify(self, message, signature):
         # type: (bytes, bytes) -> bytes
         pass   # pragma: nocover
 
 
 class SigningKey(BaseKey):
+    """The private part of a key pair, for use with sign_json"""
     def sign(self, message):
         # type: (bytes) -> nacl.signing.SignedMessage
         pass   # pragma: nocover
