@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Copyright 2014 OpenMarket Ltd
+# Copyright 2020 The Matrix.org Foundation C.I.C
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from canonicaljson import encode_canonical_json
-from unpaddedbase64 import encode_base64, decode_base64
-from signedjson.key import SUPPORTED_ALGORITHMS
 
 import logging
+from typing import Any, Dict, Iterable, List
+
+from canonicaljson import encode_canonical_json
+from unpaddedbase64 import decode_base64, encode_base64
+
+from signedjson.key import SUPPORTED_ALGORITHMS
+from signedjson.types import SigningKey, VerifyKey
 
 logger = logging.getLogger(__name__)
 
+JsonDict = Dict[str, Any]
+
 
 def sign_json(json_object, signature_name, signing_key):
+    # type: (JsonDict, str, SigningKey) -> JsonDict
     """Sign the JSON object. Stores the signature in json_object["signatures"].
 
     Args:
@@ -55,6 +63,7 @@ def sign_json(json_object, signature_name, signing_key):
 
 def signature_ids(json_object, signature_name,
                   supported_algorithms=SUPPORTED_ALGORITHMS):
+    # type: (JsonDict, str, Iterable[str]) -> List[str]
     """Does the JSON object have a signature for the given name?
     Args:
         json_object (dict): The JSON object to check.
@@ -77,15 +86,16 @@ class SignatureVerifyException(Exception):
 
 
 def verify_signed_json(json_object, signature_name, verify_key):
+    # type: (JsonDict, str, VerifyKey) -> None
     """Check a signature on a signed JSON object.
 
     Args:
-        json_object (dict): The signed JSON object to check.
-        signature_name (str): The name of the signature to check.
-        verify_key (syutil.crypto.VerifyKey): The key to verify the signature.
+        json_object: The signed JSON object to check.
+        signature_name: The name of the signature to check.
+        verify_key: The key to verify the signature.
 
     Raises:
-        InvalidSignature: If the signature isn't valid
+        SignatureVerifyException: If the signature isn't valid
     """
 
     try:
