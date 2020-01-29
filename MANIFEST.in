@@ -1,3 +1,4 @@
+prune .idea
 include *.in
 include *.py
 include tests/*.py

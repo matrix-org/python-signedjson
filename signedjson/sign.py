@@ -97,14 +97,14 @@ def verify_signed_json(json_object, signature_name, verify_key):
 
     try:
         signature_b64 = signatures[signature_name][key_id]
-    except:
+    except KeyError:
         raise SignatureVerifyException(
             "Missing signature for %s, %s" % (signature_name, key_id)
         )
 
     try:
         signature = decode_base64(signature_b64)
-    except:
+    except Exception:
         raise SignatureVerifyException(
             "Invalid signature base64 for %s, %s" % (signature_name, key_id)
         )
@@ -119,8 +119,7 @@ def verify_signed_json(json_object, signature_name, verify_key):
 
     try:
         verify_key.verify(message, signature)
-    except:
-        logger.exception("Error verifying signature")
+    except Exception as e:
         raise SignatureVerifyException(
-            "Unable to verify signature for %s " % signature_name
+            "Unable to verify signature for %s: %s %s" % (signature_name, type(e), e)
         )
