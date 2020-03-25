@@ -1,17 +1,17 @@
-
 import unittest
 
 from signedjson.key import (
-    generate_signing_key,
-    get_verify_key,
     decode_signing_key_base64,
+    decode_verify_key_base64,
     decode_verify_key_bytes,
     encode_signing_key_base64,
-    is_signing_algorithm_supported,
     encode_verify_key_base64,
-    read_signing_keys,
+    generate_signing_key,
+    get_verify_key,
+    is_signing_algorithm_supported,
     read_old_signing_keys,
-    write_signing_keys
+    read_signing_keys,
+    write_signing_keys,
 )
 
 
@@ -50,6 +50,25 @@ class DecodeTestCase(unittest.TestCase):
         with self.assertRaises(Exception):
             decode_signing_key_base64("ed25519", self.version, "")
 
+    def test_decode_verify_key(self):
+        decoded_key = decode_verify_key_base64(
+            "ed25519", self.version, self.verify_key_base64
+        )
+        self.assertEquals(decoded_key.alg, "ed25519")
+        self.assertEquals(decoded_key.version, self.version)
+
+    def test_decode_verify_key_invalid_base64(self):
+        with self.assertRaises(Exception):
+            decode_verify_key_base64("ed25519", self.version, "not base 64")
+
+    def test_decode_verify_key_invalid_algorithm(self):
+        with self.assertRaises(Exception):
+            decode_verify_key_base64("not a valid alg", self.version, "")
+
+    def test_decode_verify_key_invalid_key(self):
+        with self.assertRaises(Exception):
+            decode_verify_key_base64("ed25519", self.version, "")
+
     def test_read_keys(self):
         stream = ["ed25519 %s %s" % (self.version, self.key_base64)]
         keys = read_signing_keys(stream)
@@ -68,6 +87,7 @@ class DecodeTestCase(unittest.TestCase):
         class MockStream(object):
             def write(self, data):
                 pass
+
         write_signing_keys(MockStream(), [self.key])
 
 
