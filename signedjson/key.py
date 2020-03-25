@@ -50,7 +50,7 @@ def get_verify_key(signing_key):
 
 
 def decode_signing_key_base64(algorithm, version, key_base64):
-    # type: (str, str, bytes) -> SigningKey
+    # type: (str, str, str) -> SigningKey
     """Decode a base64 encoded signing key
     Args:
         algorithm: The algorithm the key is for (currently "ed25519").
