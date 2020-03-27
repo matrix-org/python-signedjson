@@ -1,0 +1,1 @@
+Reinstate `decode_verify_key_base64` function which was erroneously removed in 1.1.0.
