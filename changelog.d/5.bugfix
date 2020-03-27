@@ -1,1 +1,0 @@
-Fix incorrect typing annotation for `decode_signing_key_base64`.
