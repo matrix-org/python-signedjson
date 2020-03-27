@@ -29,27 +29,19 @@ def read_file(path_segments):
         return f.read()
 
 
-def exec_file(path_segments, name):
-    """Extract a constant from a python file by looking for a line defining
-    the constant and executing it."""
-    result = {}
-    code = read_file(path_segments)
-    lines = [line for line in code.split('\n') if line.startswith(name)]
-    exec("\n".join(lines), result)
-    return result[name]
-
-
 setup(
     name="signedjson",
-    version=exec_file(("signedjson", "__init__.py",), "__version__"),
     packages=["signedjson"],
     description="Sign JSON with Ed25519 signatures",
+    use_scm_version=True,
+    setup_requires=["setuptools_scm"],
     install_requires=[
         "canonicaljson>=1.0.0",
         "unpaddedbase64>=1.0.1",
         "pynacl>=0.3.0",
         "typing_extensions>=3.5",
         'typing>=3.5;python_version<"3.5"',
+        "importlib_metadata",
     ],
     long_description=read_file(("README.rst",)),
     keywords="json",
