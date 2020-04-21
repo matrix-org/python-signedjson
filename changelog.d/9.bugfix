@@ -1,0 +1,1 @@
+Do not require importlib_metadata on python 3.8.
