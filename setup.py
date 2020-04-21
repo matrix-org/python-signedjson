@@ -41,7 +41,7 @@ setup(
         "pynacl>=0.3.0",
         "typing_extensions>=3.5",
         'typing>=3.5;python_version<"3.5"',
-        "importlib_metadata",
+        'importlib_metadata;python_version<"3.8"',
     ],
     long_description=read_file(("README.rst",)),
     keywords="json",
