@@ -39,10 +39,13 @@ setup(
         "canonicaljson>=1.0.0",
         "unpaddedbase64>=1.0.1",
         "pynacl>=0.3.0",
-        "typing_extensions>=3.5",
+        'typing_extensions>=3.5;python_version<"3.8"',
         'typing>=3.5;python_version<"3.5"',
         'importlib_metadata;python_version<"3.8"',
     ],
+    extras_require={
+        "dev": ["typing_extensions>=3.5"],
+    },
     long_description=read_file(("README.rst",)),
     keywords="json",
 )
