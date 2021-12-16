@@ -13,8 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+from typing import TYPE_CHECKING
+
 import nacl.signing
-from typing_extensions import Protocol
+
+if TYPE_CHECKING or sys.version_info < (3, 8, 0):
+    from typing_extensions import Protocol
+else:
+    from typing import Protocol
 
 
 class BaseKey(Protocol):
