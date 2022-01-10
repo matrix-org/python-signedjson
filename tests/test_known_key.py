@@ -41,7 +41,7 @@ class KnownKeyTestCase(unittest.TestCase):
         self.signing_key.version = KEY_VER
 
     def test_sign_minimal(self):
-        self.assertEquals(
+        self.assertEqual(
             sign_json({}, "domain", self.signing_key),
             {
                 'signatures': {
@@ -54,7 +54,7 @@ class KnownKeyTestCase(unittest.TestCase):
         )
 
     def test_sign_with_data(self):
-        self.assertEquals(
+        self.assertEqual(
             sign_json({'one': 1, 'two': "Two"}, "domain", self.signing_key),
             {
                 'one': 1,
