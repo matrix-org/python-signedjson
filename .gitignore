@@ -8,5 +8,7 @@ __pycache__
 build/
 dist/
 
+poetry.lock
+
 # For direnv users.
 .envrc

@@ -1,4 +1,0 @@
-prune .idea
-include tests/*.py
-include LICENSE
-include tox.ini
