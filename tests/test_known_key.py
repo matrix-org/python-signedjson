@@ -21,9 +21,7 @@ from unpaddedbase64 import decode_base64
 
 from signedjson.sign import sign_json
 
-SIGNING_KEY_SEED = decode_base64(
-    "YJDBA9Xnr2sVqXD9Vj7XVUnmFZcZrlw8Md7kMW+3XA1"
-)
+SIGNING_KEY_SEED = decode_base64("YJDBA9Xnr2sVqXD9Vj7XVUnmFZcZrlw8Md7kMW+3XA1")
 
 KEY_ALG = "ed25519"
 KEY_VER = 1
@@ -31,8 +29,8 @@ KEY_NAME = "%s:%d" % (KEY_ALG, KEY_VER)
 
 
 class KnownKeyTestCase(unittest.TestCase):
-    """ An entirely deterministic test using a given signing key seed, so that
-    other implementations can compare that they get the same result. """
+    """An entirely deterministic test using a given signing key seed, so that
+    other implementations can compare that they get the same result."""
 
     def setUp(self):
         self.signing_key = nacl.signing.SigningKey(SIGNING_KEY_SEED)
@@ -43,26 +41,26 @@ class KnownKeyTestCase(unittest.TestCase):
         self.assertEqual(
             sign_json({}, "domain", self.signing_key),
             {
-                'signatures': {
-                    'domain': {
+                "signatures": {
+                    "domain": {
                         KEY_NAME: "K8280/U9SSy9IVtjBuVeLr+HpOB4BQFWbg+UZaADMt"
                         "TdGYI7Geitb76LTrr5QV/7Xg4ahLwYGYZzuHGZKM5ZAQ"
                     },
                 }
-            }
+            },
         )
 
     def test_sign_with_data(self):
         self.assertEqual(
-            sign_json({'one': 1, 'two': "Two"}, "domain", self.signing_key),
+            sign_json({"one": 1, "two": "Two"}, "domain", self.signing_key),
             {
-                'one': 1,
-                'two': "Two",
-                'signatures': {
-                    'domain': {
+                "one": 1,
+                "two": "Two",
+                "signatures": {
+                    "domain": {
                         KEY_NAME: "KqmLSbO39/Bzb0QIYE82zqLwsA+PDzYIpIRA2sRQ4s"
                         "L53+sN6/fpNSoqE7BP7vBZhG6kYdD13EIMJpvhJI+6Bw"
                     },
-                }
-            }
+                },
+            },
         )

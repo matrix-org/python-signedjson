@@ -28,48 +28,45 @@ from signedjson.sign import (
 
 class JsonSignTestCase(unittest.TestCase):
     def setUp(self):
-        self.message = {'foo': 'bar', 'unsigned': {}}
+        self.message = {"foo": "bar", "unsigned": {}}
         self.sigkey = MockSigningKey()
-        self.assertEqual(self.sigkey.alg, 'mock')
-        self.signed = sign_json(self.message, 'Alice', self.sigkey)
+        self.assertEqual(self.sigkey.alg, "mock")
+        self.signed = sign_json(self.message, "Alice", self.sigkey)
         self.verkey = MockVerifyKey()
 
     def test_sign_and_verify(self):
-        self.assertIn('signatures', self.signed)
-        self.assertIn('Alice', self.signed['signatures'])
-        self.assertIn('mock:test', self.signed['signatures']['Alice'])
+        self.assertIn("signatures", self.signed)
+        self.assertIn("Alice", self.signed["signatures"])
+        self.assertIn("mock:test", self.signed["signatures"]["Alice"])
         self.assertEqual(
-            self.signed['signatures']['Alice']['mock:test'],
-            encode_base64(b'x_______')
+            self.signed["signatures"]["Alice"]["mock:test"], encode_base64(b"x_______")
         )
         self.assertEqual(self.sigkey.signed_bytes, b'{"foo":"bar"}')
-        verify_signed_json(self.signed, 'Alice', self.verkey)
+        verify_signed_json(self.signed, "Alice", self.verkey)
 
     def test_signature_ids(self):
-        key_ids = signature_ids(
-            self.signed, 'Alice', supported_algorithms=['mock']
-        )
-        self.assertListEqual(key_ids, ['mock:test'])
+        key_ids = signature_ids(self.signed, "Alice", supported_algorithms=["mock"])
+        self.assertListEqual(key_ids, ["mock:test"])
 
     def test_verify_fail(self):
-        self.signed['signatures']['Alice']['mock:test'] = encode_base64(
-            b'not a signature'
+        self.signed["signatures"]["Alice"]["mock:test"] = encode_base64(
+            b"not a signature"
         )
         with self.assertRaises(SignatureVerifyException):
-            verify_signed_json(self.signed, 'Alice', self.verkey)
+            verify_signed_json(self.signed, "Alice", self.verkey)
 
     def test_verify_fail_no_signatures(self):
         with self.assertRaises(SignatureVerifyException):
-            verify_signed_json({}, 'Alice', self.verkey)
+            verify_signed_json({}, "Alice", self.verkey)
 
     def test_verify_fail_no_signature_for_alice(self):
         with self.assertRaises(SignatureVerifyException):
-            verify_signed_json({'signatures': {}}, 'Alice', self.verkey)
+            verify_signed_json({"signatures": {}}, "Alice", self.verkey)
 
     def test_verify_fail_not_base64(self):
-        invalid = {'signatures': {'Alice': {'mock:test': 'not base64'}}}
+        invalid = {"signatures": {"Alice": {"mock:test": "not base64"}}}
         with self.assertRaises(SignatureVerifyException):
-            verify_signed_json(invalid, 'Alice', self.verkey)
+            verify_signed_json(invalid, "Alice", self.verkey)
 
 
 class MockSigningKey(object):

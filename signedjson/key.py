@@ -125,7 +125,7 @@ def decode_verify_key_bytes(key_id, key_bytes):
         A VerifyKey object.
     """
     if key_id.startswith(NACL_ED25519 + ":"):
-        version = key_id[len(NACL_ED25519) + 1:]
+        version = key_id[len(NACL_ED25519) + 1 :]
         key = nacl.signing.VerifyKey(key_bytes)
         key.version = version
         key.alg = NACL_ED25519
@@ -176,4 +176,11 @@ def write_signing_keys(stream, keys):
     """
     for key in keys:
         key_base64 = encode_signing_key_base64(key)
-        stream.write("%s %s %s\n" % (key.alg, key.version, key_base64,))
+        stream.write(
+            "%s %s %s\n"
+            % (
+                key.alg,
+                key.version,
+                key_base64,
+            )
+        )

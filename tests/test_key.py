@@ -19,7 +19,7 @@ class GenerateTestCase(unittest.TestCase):
     def test_generate_key(self):
         my_version = "my_version"
         my_key = generate_signing_key(my_version)
-        self.assertEqual(my_key.alg, 'ed25519')
+        self.assertEqual(my_key.alg, "ed25519")
         self.assertEqual(my_key.version, my_version)
 
 
@@ -35,7 +35,7 @@ class DecodeTestCase(unittest.TestCase):
         decoded_key = decode_signing_key_base64(
             "ed25519", self.version, self.key_base64
         )
-        self.assertEqual(decoded_key.alg, 'ed25519')
+        self.assertEqual(decoded_key.alg, "ed25519")
         self.assertEqual(decoded_key.version, self.version)
 
     def test_decode_invalid_base64(self):
@@ -54,7 +54,7 @@ class DecodeTestCase(unittest.TestCase):
         decoded_key = decode_verify_key_base64(
             "ed25519", self.version, self.verify_key_base64
         )
-        self.assertEqual(decoded_key.alg, 'ed25519')
+        self.assertEqual(decoded_key.alg, "ed25519")
         self.assertEqual(decoded_key.version, self.version)
 
     def test_decode_verify_key_invalid_base64(self):
