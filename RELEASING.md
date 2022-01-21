@@ -24,8 +24,8 @@
    ```
 1. Build and upload to PyPI:
    ```sh
-   python setup.py sdist
-   twine upload dist/python-signedjson-$ver.tar.gz
+   poetry build
+   twine upload dist/*
    ```
 1. Create release on GH project page:
    ```sh

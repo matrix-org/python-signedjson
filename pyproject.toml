@@ -82,6 +82,7 @@ importlib_metadata = { version = "*", python = "<3.8" }
 
 [tool.poetry.dev-dependencies]
 typing_extensions = ">= 3.5"
+twine = "==3.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
