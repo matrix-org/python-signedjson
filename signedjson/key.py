@@ -20,7 +20,7 @@ from typing import Iterable, List, TextIO
 import nacl.signing
 from unpaddedbase64 import decode_base64, encode_base64
 
-from signedjson.types import SigningKey, VerifyKey
+from signedjson.types import SigningKey, VerifyKey, VerifyKeyWithExpiry
 
 NACL_ED25519 = "ed25519"
 SUPPORTED_ALGORITHMS = [NACL_ED25519]
@@ -34,7 +34,7 @@ def generate_signing_key(version):
     Returns:
         A SigningKey object.
     """
-    key = nacl.signing.SigningKey.generate()
+    key: SigningKey = nacl.signing.SigningKey.generate()  # type: ignore[assignment]
     key.version = version
     key.alg = NACL_ED25519
     return key
@@ -43,7 +43,7 @@ def generate_signing_key(version):
 def get_verify_key(signing_key):
     # type: (SigningKey) -> VerifyKey
     """Get a verify key from a signing key"""
-    verify_key = signing_key.verify_key
+    verify_key: VerifyKey = signing_key.verify_key  # type: ignore[assignment]
     verify_key.version = signing_key.version
     verify_key.alg = signing_key.alg
     return verify_key
@@ -61,7 +61,7 @@ def decode_signing_key_base64(algorithm, version, key_base64):
     """
     if algorithm == NACL_ED25519:
         key_bytes = decode_base64(key_base64)
-        key = nacl.signing.SigningKey(key_bytes)
+        key: SigningKey = nacl.signing.SigningKey(key_bytes)  # type: ignore[assignment]
         key.version = version
         key.alg = NACL_ED25519
         return key
@@ -126,7 +126,7 @@ def decode_verify_key_bytes(key_id, key_bytes):
     """
     if key_id.startswith(NACL_ED25519 + ":"):
         version = key_id[len(NACL_ED25519) + 1 :]
-        key = nacl.signing.VerifyKey(key_bytes)
+        key: VerifyKey = nacl.signing.VerifyKey(key_bytes)  # type: ignore[assignment]
         key.version = version
         key.alg = NACL_ED25519
         return key
@@ -151,7 +151,7 @@ def read_signing_keys(stream):
 
 
 def read_old_signing_keys(stream):
-    # type: (Iterable[str]) -> List[VerifyKey]
+    # type: (Iterable[str]) -> List[VerifyKeyWithExpiry]
     """Reads a list of old keys from a stream
     Args:
         stream : A stream to iterate for keys.
@@ -161,7 +161,9 @@ def read_old_signing_keys(stream):
     keys = []
     for line in stream:
         algorithm, version, expired, key_base64 = line.split()
-        key = decode_verify_key_base64(algorithm, version, key_base64)
+        key: VerifyKeyWithExpiry = decode_verify_key_base64(
+            algorithm, version, key_base64
+        )  # type: ignore[assignment]
         key.expired = int(expired)
         keys.append(key)
     return keys

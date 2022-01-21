@@ -43,6 +43,10 @@ class VerifyKey(BaseKey):
         pass  # pragma: nocover
 
 
+class VerifyKeyWithExpiry(VerifyKey):
+    expired: int
+
+
 class SigningKey(BaseKey):
     """The private part of a key pair, for use with sign_json"""
 

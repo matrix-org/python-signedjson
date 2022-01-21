@@ -43,3 +43,11 @@ known_first_party = ["signedjson", "tests"]
 
 [tool.black]
 # Placeholder for now.
+
+[tool.mypy]
+files = ["signedjson", "tests"]
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["canonicaljson"]
+ignore_missing_imports = true

@@ -15,7 +15,10 @@
 try:
     from importlib.metadata import PackageNotFoundError, version
 except ImportError:  # pragma: nocover
-    from importlib_metadata import PackageNotFoundError, version
+    from importlib_metadata import (  # type: ignore[import, no-redef]
+        PackageNotFoundError,
+        version,
+    )
 
 try:
     __version__ = version(__name__)
