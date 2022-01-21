@@ -19,7 +19,10 @@ import unittest
 from unpaddedbase64 import encode_base64
 
 from signedjson.sign import (
-    sign_json, verify_signed_json, signature_ids, SignatureVerifyException
+    SignatureVerifyException,
+    sign_json,
+    signature_ids,
+    verify_signed_json,
 )
 
 

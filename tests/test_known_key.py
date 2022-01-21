@@ -16,9 +16,8 @@
 
 import unittest
 
-from unpaddedbase64 import decode_base64
-
 import nacl.signing
+from unpaddedbase64 import decode_base64
 
 from signedjson.sign import sign_json
 
