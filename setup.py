@@ -49,4 +49,7 @@ setup(
     },
     long_description=read_file(("README.rst",)),
     keywords="json",
+    package_data={
+        "signedjson": ["py.typed"]
+    }
 )
