@@ -15,7 +15,7 @@
 try:
     from importlib.metadata import PackageNotFoundError, version
 except ImportError:  # pragma: nocover
-    from importlib_metadata import (  # type: ignore[import, no-redef]
+    from importlib_metadata import (  # type: ignore[misc]
         PackageNotFoundError,
         version,
     )
