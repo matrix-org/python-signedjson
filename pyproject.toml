@@ -33,3 +33,21 @@
         directory = "misc"
         name = "Internal Changes"
         showcontent = true
+
+[tool.isort]
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+combine_as_imports = true
+known_first_party = ["signedjson", "tests"]
+
+[tool.black]
+# Placeholder for now.
+
+[tool.mypy]
+files = ["signedjson", "tests"]
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["canonicaljson"]
+ignore_missing_imports = true

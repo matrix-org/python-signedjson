@@ -61,8 +61,9 @@ def sign_json(json_object, signature_name, signing_key):
     return json_object
 
 
-def signature_ids(json_object, signature_name,
-                  supported_algorithms=SUPPORTED_ALGORITHMS):
+def signature_ids(
+    json_object, signature_name, supported_algorithms=SUPPORTED_ALGORITHMS
+):
     # type: (JsonDict, str, Iterable[str]) -> List[str]
     """Does the JSON object have a signature for the given name?
     Args:
@@ -75,13 +76,13 @@ def signature_ids(json_object, signature_name,
     """
     key_ids = json_object.get("signatures", {}).get(signature_name, {}).keys()
     return list(
-        key_id for key_id in key_ids
-        if key_id.split(":")[0] in supported_algorithms
+        key_id for key_id in key_ids if key_id.split(":")[0] in supported_algorithms
     )
 
 
 class SignatureVerifyException(Exception):
     """A signature could not be verified"""
+
     pass
 
 
@@ -131,7 +132,10 @@ def verify_signed_json(json_object, signature_name, verify_key):
         verify_key.verify(message, signature)
     except Exception as e:
         raise SignatureVerifyException(
-            "Unable to verify signature for %s: %s %s" % (
-                signature_name, type(e), e,
+            "Unable to verify signature for %s: %s %s"
+            % (
+                signature_name,
+                type(e),
+                e,
             )
         )

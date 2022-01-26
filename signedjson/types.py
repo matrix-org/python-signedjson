@@ -26,28 +26,35 @@ else:
 
 class BaseKey(Protocol):
     """Common base type for VerifyKey and SigningKey"""
+
     version = ""  # type: str
     alg = ""  # type: str
 
     def encode(self):
         # type: () -> bytes
-        pass   # pragma: nocover
+        pass  # pragma: nocover
 
 
 class VerifyKey(BaseKey):
     """The public part of a key pair, for use with verify_signed_json"""
+
     def verify(self, message, signature):
         # type: (bytes, bytes) -> bytes
-        pass   # pragma: nocover
+        pass  # pragma: nocover
+
+
+class VerifyKeyWithExpiry(VerifyKey):
+    expired: int
 
 
 class SigningKey(BaseKey):
     """The private part of a key pair, for use with sign_json"""
+
     def sign(self, message):
         # type: (bytes) -> nacl.signing.SignedMessage
-        pass   # pragma: nocover
+        pass  # pragma: nocover
 
     @property
     def verify_key(self):
         # type: () -> nacl.signing.VerifyKey
-        pass   # pragma: nocover
+        pass  # pragma: nocover

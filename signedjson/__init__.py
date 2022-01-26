@@ -13,9 +13,12 @@
 # limitations under the License.
 
 try:
-    from importlib.metadata import version, PackageNotFoundError
+    from importlib.metadata import PackageNotFoundError, version
 except ImportError:  # pragma: nocover
-    from importlib_metadata import version, PackageNotFoundError
+    from importlib_metadata import (  # type: ignore[import, no-redef]
+        PackageNotFoundError,
+        version,
+    )
 
 try:
     __version__ = version(__name__)
