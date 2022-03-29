@@ -4,7 +4,7 @@ Signedjson 1.1.2 (2022-03-29)
 Bugfixes
 --------
 
-- Do not require `importlib_metadata` on Python 3.8 and above. ([\#9](https://github.com/matrix-org/python-signedjson/issues/9))
+- Do not require `importlib_metadata` on Python 3.8 and above. By @MeggyCal. ([\#9](https://github.com/matrix-org/python-signedjson/issues/9))
 
 
 Internal Changes
