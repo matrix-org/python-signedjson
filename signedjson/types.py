@@ -59,5 +59,7 @@ class SigningKey(BaseKey):
 
     @property
     def verify_key(self):
+        # Note: use `signedjson.key.get_verify_key` to get a
+        # `signedjson.types.VerifyKey`.
         # type: () -> nacl.signing.VerifyKey
         pass  # pragma: nocover
