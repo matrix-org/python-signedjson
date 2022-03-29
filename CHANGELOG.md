@@ -1,3 +1,13 @@
+Signedjson 1.1.3 (2022-03-29)
+=============================
+
+
+Internal Changes
+----------------
+
+- Mark the `SigningKey` and `VerifyKey` types as `SupportsBytes`. ([\#21](https://github.com/matrix-org/python-signedjson/issues/21))
+
+
 Signedjson 1.1.2 (2022-03-29)
 =============================
 
