@@ -14,7 +14,7 @@
 # limitations under the License.
 
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, SupportsBytes
 
 import nacl.signing
 
@@ -24,7 +24,7 @@ else:
     from typing import Protocol
 
 
-class BaseKey(Protocol):
+class BaseKey(Protocol, SupportsBytes):
     """Common base type for VerifyKey and SigningKey"""
 
     version = ""  # type: str
@@ -56,5 +56,7 @@ class SigningKey(BaseKey):
 
     @property
     def verify_key(self):
+        # Note: use `signedjson.key.get_verify_key` to get a
+        # `signedjson.types.VerifyKey`.
         # type: () -> nacl.signing.VerifyKey
         pass  # pragma: nocover
