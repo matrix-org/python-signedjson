@@ -14,7 +14,7 @@
 # limitations under the License.
 
 import sys
-from typing import TYPE_CHECKING, SupportsBytes
+from typing import TYPE_CHECKING
 
 import nacl.signing
 
@@ -24,11 +24,14 @@ else:
     from typing import Protocol
 
 
-class BaseKey(Protocol, SupportsBytes):
+class BaseKey(Protocol):
     """Common base type for VerifyKey and SigningKey"""
 
     version = ""  # type: str
     alg = ""  # type: str
+
+    def __bytes__(self) -> bytes:
+        pass
 
     def encode(self):
         # type: () -> bytes
