@@ -30,6 +30,9 @@ class BaseKey(Protocol):
     version = ""  # type: str
     alg = ""  # type: str
 
+    def __bytes__(self) -> bytes:
+        pass
+
     def encode(self):
         # type: () -> bytes
         pass  # pragma: nocover
