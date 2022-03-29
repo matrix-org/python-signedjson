@@ -5,6 +5,7 @@
 1. Update the changelog:
    ```sh
    towncrier --version=$ver
+   # On newer towncriers: towncrier build --version=$ver
    ```
 1. Push your changes:
    ```sh
