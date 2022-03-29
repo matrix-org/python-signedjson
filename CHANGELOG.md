@@ -1,3 +1,12 @@
+Signedjson 1.1.4 (2022-03-29)
+=============================
+
+Bugfixes
+--------
+
+- Fix a bug introduced in signedjson 1.1.3 where `signedjson` could not be imported due to an MRO resolution error. ([\#22](https://github.com/matrix-org/python-signedjson/issues/22))
+
+
 Signedjson 1.1.3 (2022-03-29)
 =============================
 
